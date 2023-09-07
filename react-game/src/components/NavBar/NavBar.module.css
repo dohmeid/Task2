@@ -1,0 +1,12 @@
+.div {
+    height: 80px;
+    border: 1px solid #171515;
+}
+
+.header {
+    text-align: center;
+    font-family: 'Impact';
+    text-transform: capitalize;
+    letter-spacing: 9px;
+    font-weight: 100;
+}
