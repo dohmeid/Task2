@@ -1,12 +1,12 @@
 import NavBar from './components/NavBar/NavBar';
-import Main from './components/Main';
+import AllTrials from './components/AllTrials';
 import './App.css';
 
 function App() {
   return (
     <div>
       <NavBar />
-      <Main />
+      <AllTrials />
     </div>
   );
 }

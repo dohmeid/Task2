@@ -1,4 +1,4 @@
-.dot {
+.circle {
     height: 50px;
     width: 50px;
     background-color: white;
@@ -6,7 +6,6 @@
     border: 1px solid #171515;
 }
 
-
-.blueCircle{
+.blueCircle {
     background-color: #00308F;
 }

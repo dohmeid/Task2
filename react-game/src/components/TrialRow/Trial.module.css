@@ -1,15 +1,13 @@
-.container1 {
+.mainContainer {
     display: flex;
     justify-content: space-around;
-    align-items: center;
     height: 8%;
-    /* 12.5 = 100/8 */
-    gap: 20px;
     padding-bottom: 25px;
 }
 
-.container2 {
+.secondaryContainer {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     width: 30%;
+    gap: 1.5em;
 }

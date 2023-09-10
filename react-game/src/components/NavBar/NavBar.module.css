@@ -1,9 +1,9 @@
-.div {
+.container {
     height: 80px;
     border: 1px solid #171515;
 }
 
-.header {
+.text {
     text-align: center;
     font-family: 'Impact';
     text-transform: capitalize;

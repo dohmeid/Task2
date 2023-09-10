@@ -1,11 +1,10 @@
 import classes from './Button.module.css';
 
-function StartButton({ startButtonClickHandler }) {
+function StartButton(props) {
 
-    console.log("StartButton 1");
     return (
         <>
-            <button className={classes.button} onClick={startButtonClickHandler}>Start</button>
+            <button className={classes.btn} onClick={props.handleClick}>Start</button>
         </>
     );
 }
