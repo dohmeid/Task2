@@ -14,8 +14,8 @@ const EnteredNumber = forwardRef(({ enableState, clearScreen }, ref) => { //ref 
     //to remove the last number from the input field if the screen needs to be cleared
     return (
         <>
-            {(clearScreen === true) && <input ref={ref} type="text" min='0' max='9' defaultValue='0' maxlength='1' className={classes.number} disabled={!enableState} />}
-            {(clearScreen === false) && <input ref={ref} type="text" min='0' max='9' maxlength='1' className={classes.number} disabled={!enableState} />}
+            {(clearScreen === true) && <input ref={ref} type="text" min='0' max='9' defaultValue='' maxLength='1' className={classes.number} disabled={!enableState} />}
+            {(clearScreen === false) && <input ref={ref} type="text" min='0' max='9' maxLength='1' className={classes.number} disabled={!enableState} />}
         </>
     );
 });

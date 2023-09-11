@@ -31,11 +31,13 @@ function AllTrials() {
         }
     }, [gameStatus]);
 
+
+    //FUNCTIONS-----------------------------------------------------------------
     function generateRandomNumber(min, max) { //generate number between min (inclusive) and max (inclusive)
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function startButtonClickHandler() {
+    function startButtonClickHandler() { //to start the game
         setGameStatus(1);
     };
 

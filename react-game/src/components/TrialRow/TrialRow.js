@@ -12,11 +12,14 @@ function TrialRow({ rowIndex, selectedIndex, setSelectedIndex, secretCode, setGa
     const [correctNumberWithIndex, setcorrectNumberWithIndex] = useState(0);
     const [correctNumberOnly, setcorrectNumberOnly] = useState(0);
     const [rowEnabled, SetRowEnabled] = useState(false);
-    const enteredNumber = useRef([]); //to get the entered number from the number input 
+    const enteredNumberRef = useRef([]); //to get the entered number from the number input 
 
     useEffect(() => { //check to enable the row or not
         if (rowIndex === selectedIndex) {
             SetRowEnabled(true);
+            if (rowIndex === 1) {
+                console.log("The secret code is: " + secretCode);
+            }
         }
     }, [rowIndex, selectedIndex]);
 
@@ -26,37 +29,44 @@ function TrialRow({ rowIndex, selectedIndex, setSelectedIndex, secretCode, setGa
             setcorrectNumberOnly(0);
             setClearScreen(false);
         }
-        if (rowIndex != 1) {
+        if (rowIndex !== 1) {
             SetRowEnabled(false);
         }
     }, [clearScreen]);
 
 
+
     //FUNCTIONS-----------------------------------------------------------------
     const checkButtonClickHandler = () => {
 
-        //get the entered number
-        let num1 = enteredNumber.current[0].value;
-        let num2 = enteredNumber.current[1].value;
-        let num3 = enteredNumber.current[2].value;
-        let num4 = enteredNumber.current[3].value;
-        console.log("The entered number is: " + num1 + num2 + num3 + num4);
-        console.log("The secret code is: " + secretCode);
+        //get the entered number from the reference array
+        const enteredNumberArray = [];
+        for (let i = 0; i < 4; i++) {
+            enteredNumberArray[i] = enteredNumberRef.current[i].value;
+        }
 
         var secretCodeArray = secretCode.toString().split(""); //convert the secretCode from number to array of digits
         let correctNumbersIndexCount = 0;
         let correctNumbersOnlyCount = 0;
 
+        //compare the secretCode with the entered number
         secretCodeArray.forEach(function (digit, index) {
-            if ((index === 0 && digit === num1) || (index === 1 && digit === num2) ||
-                (index === 2 && digit === num3) || (index === 3 && digit === num4)) {
+            if (digit === enteredNumberArray[index]) { //correct number in the correct place case
                 correctNumbersIndexCount++;
+                enteredNumberArray[index] = -1; //set the correct number to -1 to avoid a problem caused by duplicate entered numbers 
             }
-            else if (digit === num1 || digit === num2 || digit === num3 || digit === num4) {
-                correctNumbersOnlyCount++;
+            else { //check if the number is correct besides the index 
+                for (let i in enteredNumberArray) {
+                    if (digit === enteredNumberArray[i]) {
+                        correctNumbersOnlyCount++;
+                        enteredNumberArray[i] = -1; //set the correct number to -1 to avoid a problem caused by duplicate entered numbers 
+                        break;
+                    }
+                }
             }
         });
 
+        //check if the game finished
         if (correctNumbersIndexCount === 4) {
             setGameStatus(2); //finished the game successfully
         }
@@ -64,6 +74,7 @@ function TrialRow({ rowIndex, selectedIndex, setSelectedIndex, secretCode, setGa
             setGameStatus(3); //the game finished with a failure 
         }
 
+        //set the results
         setcorrectNumberWithIndex(correctNumbersIndexCount);
         setcorrectNumberOnly(correctNumbersOnlyCount);
 
@@ -73,12 +84,14 @@ function TrialRow({ rowIndex, selectedIndex, setSelectedIndex, secretCode, setGa
     };
 
 
+
     //JSX CODE-----------------------------------------------------------------
     return (
         <div className={classes.mainContainer}>
+
             <div className={classes.secondaryContainer}>  {/* RENDER THE 4 NUMBER INPUT FIELDS*/}
                 {Array(4).fill().map((number, i) =>
-                    <EnteredNumber key={i} ref={(el) => (enteredNumber.current[i] = el)} enableState={rowEnabled} clearScreen={clearScreen} />
+                    <EnteredNumber key={i} ref={(el) => (enteredNumberRef.current[i] = el)} enableState={rowEnabled} clearScreen={clearScreen} />
                 )}
             </div>
 
@@ -95,7 +108,6 @@ function TrialRow({ rowIndex, selectedIndex, setSelectedIndex, secretCode, setGa
 
         </div>
     );
-
 }
 
 export default TrialRow;
