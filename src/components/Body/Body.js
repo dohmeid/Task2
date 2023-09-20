@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Trials from './Trials/Trials';
 import Results from './Results/Results';
+import GAME_STATUS from './Body.service';
 import classes from './Body.module.css';
-
-const GAME_STATUS = {
-    NOT_STARTED: 0,
-    ACTIVE: 1,
-    WON: 2,
-    LOST: 3
-}
 
 const Body = () => {
 
@@ -27,18 +21,18 @@ const Body = () => {
                 setSecretCode(generateRandomNumber(1000, 9999)); //set a new random secret code
                 setSelectedIndex(1); //to enable the first row again
                 setClearScreen(true);
-                return;
+                break;
 
             case GAME_STATUS.WON:
                 setResultText("Congrats, You won the game!");
-                return;
+                break;
 
             case GAME_STATUS.LOST:
                 setResultText("Game Over, You lost the game :(");
-                return;
+                break;
 
             default:
-                return;
+                break;
         }
     }, [gameStatus]);
 
@@ -61,12 +55,10 @@ const Body = () => {
             <Trials selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}
                 secretCode={secretCode}
                 setGameStatus={setGameStatus}
-                clearScreen={clearScreen} setClearScreen={setClearScreen}
-                GAME_STATUS_WON={GAME_STATUS.WON} GAME_STATUS_LOST={GAME_STATUS.LOST} />
+                clearScreen={clearScreen} setClearScreen={setClearScreen} />
 
             {/* RENDER THE RESULTS/START SECTION*/}
             <Results resultText={resultText} gameStatus={gameStatus} secretCode={secretCode}
-                GAME_STATUS_WON={GAME_STATUS.WON} GAME_STATUS_LOST={GAME_STATUS.LOST}
                 startButtonClickHandler={startButtonClickHandler} />
 
         </div>

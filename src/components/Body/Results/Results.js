@@ -1,5 +1,6 @@
 import React from 'react';
-import Buttons from '../../Common/Buttons/Buttons';
+import Button from '../../Common/Button/Button';
+import GAME_STATUS from '../Body.service';
 import classes from './Results.module.css';
 
 const Results = (props) => {
@@ -9,9 +10,9 @@ const Results = (props) => {
             <div className={classes.text}>
                 <p>{props.resultText}</p>
                 <p>Secret code</p>
-                {(props.gameStatus === props.GAME_STATUS_WON || props.gameStatus === props.GAME_STATUS_LOST) && <p>{props.secretCode}</p>}
+                {(props.gameStatus === GAME_STATUS.WON || props.gameStatus === GAME_STATUS.LOST) && <p>{props.secretCode}</p>}
             </div>
-            <Buttons handleClick={props.startButtonClickHandler} type={"startButton"} />
+            <Button startButtonClickHandler={props.startButtonClickHandler} type={"start"} />
         </div>
     );
 }

@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Buttons from '../../../Common/Buttons/Buttons';
+import Button from '../../../Common/Button/Button';
 import Circles from './Circles/Circles';
 import NumberInput from './NumberInput/NumberInput';
+import GAME_STATUS, { NUMBER_OF_ALLOWED_TRIALS, NUMBER_OF_DIGITS } from '../../Body.service';
 import classes from './TrialRow.module.css';
-
 
 const TrialRow = (props) => {
 
@@ -12,8 +12,6 @@ const TrialRow = (props) => {
     const [correctNumbersOnly, setCorrectNumbersOnly] = useState(0);
     const [rowEnabled, setRowEnabled] = useState(false);
     const enteredNumberRef = useRef([]); //to get the entered number from the number input 
-    const numberOfDigits = 4;
-    const numberOfTrials = 8;
 
     useEffect(() => { //check to enable the row or not
         if (props.rowIndex === props.selectedIndex) {
@@ -38,7 +36,7 @@ const TrialRow = (props) => {
 
         //get the entered number from the reference array
         const enteredNumberArray = [];
-        for (let i = 0; i < numberOfDigits; i++) {
+        for (let i = 0; i < NUMBER_OF_DIGITS; i++) {
             enteredNumberArray[i] = enteredNumberRef.current[i].value;
         }
 
@@ -64,11 +62,11 @@ const TrialRow = (props) => {
         });
 
         //check if the game finished
-        if (correctNumbersIndexCount === numberOfDigits) {
-            props.setGameStatus(props.GAME_STATUS_WON); //finished the game successfully
+        if (correctNumbersIndexCount === NUMBER_OF_DIGITS) {
+            props.setGameStatus(GAME_STATUS.WON); //finished the game successfully
         }
-        else if (props.rowIndex === numberOfTrials) {
-            props.setGameStatus(props.GAME_STATUS_LOST); //the game finished with a failure 
+        else if (props.rowIndex === NUMBER_OF_ALLOWED_TRIALS) {
+            props.setGameStatus(GAME_STATUS.LOST); //the game finished with a failure 
         }
 
         //set the results
@@ -87,12 +85,12 @@ const TrialRow = (props) => {
 
             {/* RENDER THE 4 NUMBER INPUT FIELDS*/}
             <div className={classes.secondaryContainer}>
-                {Array(numberOfDigits).fill().map((number, i) =>
+                {Array(NUMBER_OF_DIGITS).fill().map((number, i) =>
                     <NumberInput key={i} ref={(el) => (enteredNumberRef.current[i] = el)} enableState={rowEnabled} clearScreen={props.clearScreen} />
                 )}
             </div>
 
-            <Buttons enableState={rowEnabled} checkButtonClickHandler={checkButtonClickHandler} type={"checkButton"} />
+            <Button enableState={rowEnabled} checkButtonClickHandler={checkButtonClickHandler} type={"check"} />
 
             {/* RENDER THE RESULT IN CIRCLES*/}
             <Circles correctNumbersWithIndex={correctNumbersWithIndex} correctNumbersOnly={correctNumbersOnly} />
