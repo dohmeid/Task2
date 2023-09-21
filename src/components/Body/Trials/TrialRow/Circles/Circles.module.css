@@ -1,0 +1,18 @@
+.secondaryContainer {
+    display: flex;
+    justify-content: flex-start;
+    width: 30%;
+    gap: 1.5em;
+}
+
+.circle {
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid #171515;
+}
+
+.blueCircle {
+    background-color: #00308F;
+}
