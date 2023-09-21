@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Trials from './Trials/Trials';
 import Results from './Results/Results';
-import GAME_STATUS from './Body.service';
+import {GAME_STATUS} from './Body.service';
 import classes from './Body.module.css';
 
 const Body = () => {

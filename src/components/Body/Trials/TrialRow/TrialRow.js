@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Button from '../../../Common/Button/Button';
 import Circles from './Circles/Circles';
 import NumberInput from './NumberInput/NumberInput';
-import GAME_STATUS, { NUMBER_OF_ALLOWED_TRIALS, NUMBER_OF_DIGITS } from '../../Body.service';
+import { GAME_STATUS, NUMBER_OF_ALLOWED_TRIALS, NUMBER_OF_DIGITS } from '../../Body.service';
 import classes from './TrialRow.module.css';
 
 const TrialRow = (props) => {
@@ -90,7 +90,7 @@ const TrialRow = (props) => {
                 )}
             </div>
 
-            <Button enableState={rowEnabled} checkButtonClickHandler={checkButtonClickHandler} type={"check"} />
+            <Button enableState={rowEnabled} buttonClickHandler={checkButtonClickHandler} type={"check"} />
 
             {/* RENDER THE RESULT IN CIRCLES*/}
             <Circles correctNumbersWithIndex={correctNumbersWithIndex} correctNumbersOnly={correctNumbersOnly} />
